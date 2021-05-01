@@ -20,11 +20,14 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         auth = FirebaseAuth.getInstance()
-
+        firebaseUser = auth!!.currentUser!!
 
         // check if user login then navigate to user screen
         if (firebaseUser != null) {
-            val intent = Intent(this@LoginActivity, UsersActivity::class.java)
+            val intent = Intent(
+                this@LoginActivity,
+                UsersActivity::class.java
+            )
             startActivity(intent)
             finish()
         }
