@@ -12,15 +12,15 @@ import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var auth: FirebaseAuth
-    private lateinit var firebaseUser: FirebaseUser
+    private var auth: FirebaseAuth? = null
+    private  var firebaseUser: FirebaseUser? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
         auth = FirebaseAuth.getInstance()
-        firebaseUser = auth.currentUser!!
+
 
         // check if user login then navigate to user screen
         if (firebaseUser != null) {
@@ -36,7 +36,7 @@ class LoginActivity : AppCompatActivity() {
             if (TextUtils.isEmpty(email) && TextUtils.isEmpty(password)) {
                 Toast.makeText(applicationContext, "Email and Password are required!", Toast.LENGTH_SHORT).show()
             } else {
-                auth.signInWithEmailAndPassword(email, password)
+                auth!!.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this) {
                         if (it.isSuccessful){
                             etEmail.setText("")
