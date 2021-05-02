@@ -1,5 +1,6 @@
 package com.oamk.chatapp.activity
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -20,6 +21,7 @@ import kotlinx.android.synthetic.main.activity_users.*
 
 class UsersActivity : AppCompatActivity() {
     var userlist = ArrayList<User>()
+    @SuppressLint("WrongConstant")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_users)
@@ -58,7 +60,7 @@ class UsersActivity : AppCompatActivity() {
                 for (dataSnapShot: DataSnapshot in snapshot.children){
                     val user = dataSnapShot.getValue(User::class.java)
 
-                    if (user!!.userId.equals(firebase.uid)){
+                    if (!user!!.userId.equals(firebase.uid)){
                         userlist.add(user)
                     }
                 }
